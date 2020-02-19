@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = ['label' => $this->title];
                                 'edit' => function ($url, $model, $key) {
                                     return Html::edit(['edit', 'id' => $model->id]);
                                 },
-                              
+
                                 'destroy' => function ($url, $model, $key) {
                                     return Html::delete(['destroy', 'id' => $model->id]);
                                 },
