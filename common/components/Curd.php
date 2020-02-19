@@ -36,8 +36,7 @@ trait Curd
     public function actionIndex()
     {
         $data = $this->modelClass::find()
-            ->where(['>=', 'status', StatusEnum::DISABLED])
-            ->andFilterWhere(['merchant_id' => $this->getMerchantId()]);
+            ->where(['>=', 'status', StatusEnum::DISABLED]);
         $pages = new Pagination(['totalCount' => $data->count(), 'pageSize' => $this->pageSize]);
         $models = $data->offset($pages->offset)
             ->orderBy('id desc')
@@ -108,6 +107,7 @@ trait Curd
     /**
      * ajax更新排序/状态
      *
+     *
      * @param $id
      * @return array
      */
@@ -158,7 +158,7 @@ trait Curd
     protected function findModel($id)
     {
         /* @var $model \yii\db\ActiveRecord */
-        if (empty($id) || empty(($model = $this->modelClass::find()->where(['id' => $id])->andFilterWhere(['merchant_id' => $this->getMerchantId()])->one()))) {
+        if (empty($id) || empty(($model = $this->modelClass::find()->where(['id' => $id])->one()))) {
             $model = new $this->modelClass;
             return $model->loadDefaultValues();
         }

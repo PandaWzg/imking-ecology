@@ -33,6 +33,10 @@ return [
         'oauth2' => [
             'class' => 'backend\modules\oauth2\Module',
         ],
+        /** ------ 公寓相关 ------ **/
+        'apartment' => [
+            'class' => 'backend\modules\apartment\Module',
+        ],
     ],
     'components' => [
         'request' => [

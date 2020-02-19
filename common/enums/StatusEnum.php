@@ -22,4 +22,8 @@ class StatusEnum
         self::ENABLED => '启用',
         self::DISABLED => '禁用',
     ];
+    public static $yesOrNo = [
+        self::ENABLED => '是',
+        self::DISABLED => '否',
+    ];
 }

@@ -3,7 +3,7 @@
 return [
     'adminEmail' => 'admin@example.com',
     'adminAcronym' => 'RF',
-    'adminTitle' => 'RageFrame',
+    'adminTitle' => '公寓管理',
     'adminDefaultHomePage' => ['main/system'], // 默认主页
 
     /** ------ 总管理员配置 ------ **/

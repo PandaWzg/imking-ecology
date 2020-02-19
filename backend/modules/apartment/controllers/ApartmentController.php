@@ -1,8 +1,8 @@
 <?php
 
-namespace backend\modules\member\controllers;
+namespace backend\modules\apartment\controllers;
 
-use Qiniu\Http\Response;
+use common\models\apartment\Apartment;
 use Yii;
 use common\models\base\SearchModel;
 use common\components\Curd;
@@ -18,14 +18,14 @@ use backend\modules\member\forms\RechargeForm;
  * @package backend\modules\member\controllers
  * @author jianyan74 <751393839@qq.com>
  */
-class MemberController extends BaseController
+class ApartmentController extends BaseController
 {
     use Curd;
 
     /**
      * @var \yii\db\ActiveRecord
      */
-    public $modelClass = Member::class;
+    public $modelClass = Apartment::class;
 
     /**
      * 首页
@@ -38,7 +38,7 @@ class MemberController extends BaseController
         $searchModel = new SearchModel([
             'model' => $this->modelClass,
             'scenario' => 'default',
-            'partialMatchAttributes' => ['realname', 'mobile'], // 模糊查询
+            'partialMatchAttributes' => [], // 模糊查询
             'defaultOrder' => [
                 'id' => SORT_DESC
             ],
@@ -48,7 +48,6 @@ class MemberController extends BaseController
         $dataProvider = $searchModel
             ->search(Yii::$app->request->queryParams);
         $dataProvider->query
-            ->andFilterWhere(['merchant_id' => $this->getMerchantId()])
             ->andWhere(['>=', 'status', StatusEnum::DISABLED]);
 
         return $this->render($this->action->id, [
@@ -118,35 +117,5 @@ class MemberController extends BaseController
             'model' => $member,
             'rechargeForm' => $rechargeForm,
         ]);
-    }
-    /**
-     * ajax获取用户
-     *
-     * @param $id
-     * @return array
-     */
-    public function actionAjaxGet($q)
-    {
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
-        $out = ['results' => ['id' => '', 'text' => '']];
-        if (!$q) {
-            return $out;
-        }
-
-
-        $members = Member::find();
-        $members = $members->select('id, username as text');
-
-        $data = $members->andFilterWhere(['or',['like', 'id', $q],['like', 'username', $q]])
-            ->limit(50)
-            ->asArray()
-            ->all();
-
-        foreach ($data as $key => &$value) {
-            $value['text'] = $value['id'] .'|'. $value['text'];
-        }
-        $out['results'] = array_values($data);
-        return $out;
     }
 }
