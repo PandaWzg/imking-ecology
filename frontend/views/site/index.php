@@ -10,7 +10,7 @@ $this->title = '公寓';
         <p><a class="btn btn-lg btn-success" href="/member/member/apply-list" style="width:70%">查看当前申请</a></p>
         <p><a class="btn btn-lg btn-success" href="/member/member/apply-list" style="width:70%">申请住宿</a></p>
         <p><a class="btn btn-lg btn-success" href="/member/member/provide-room" style="width:70%">提供房源</a></p>
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com" style="width:70%">志愿者工作</a></p>
+        <p><a class="btn btn-lg btn-success" href="" style="width:70%">志愿者工作</a></p>
     </div>
     
 </div>
